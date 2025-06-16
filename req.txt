@@ -1,0 +1,14 @@
+pip install -r requirements.txt
+
+chromadb #vector database
+requests #webscraping
+beautifulsoup4 #parsing HTML
+PyMuPDF #extract text from local pdf
+langchain
+
+
+#standard python libraries
+#os
+#time
+#uuid
+#pathlib

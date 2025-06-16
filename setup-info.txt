@@ -1,0 +1,12 @@
+SecDB #Chroma vector database(my_chroma_db)
+
+SecData #Chroma reference (my_information_source)
+
+loc_data #local data source folder
+
+
+add_data.py #interactive adding new data to SecDB (Chroma DB)
+urls.txt    #list of URLs for add_data.py to scrape
+req.txt  #required dependencies
+dep_check.py  #checks the list of required dependcies are installled
+---------
