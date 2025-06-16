@@ -2,6 +2,8 @@
 from pathlib import Path
 from bs4 import BeautifulSoup
 import fitz  # PyMuPDF
+import chromadb
+import time
 
 # --- Configuration ---
 CHROMA_PATH = "SecDB"
@@ -83,43 +85,6 @@ def process_local_folder(collection):
         # --- Chunking Logic ---
         # Instead of adding the whole file, we split it into smaller chunks.
         # A good starting strategy is to split by paragraphs.
-
-
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-
-		# 1. Text splitter
-		text_splitter = RecursiveCharacterTextSplitter(
-			chunk_size=1000,  # The target size of each chunk in characters
-			chunk_overlap=200   # The number of characters to overlap between chunks
-		)
-		chunks = text_splitter.split_text(text)
-
-        # 2. Prepare for batch adding to ChromaDB
-        ids_list = []
-        metadatas_list = []
-        
-        for i, chunk in enumerate(chunks):
-            # Create chucnk unique IDs
-            chunk_id = f"file_{filepath.name}_mod_{file_mod_time}_chunk_{i+1}"
-            ids_list.append(chunk_id)
-
-            # Each chunk from the same file shares the same metadata
-            # but also gets its own chunk number
-            chunk_metadata = {
-                "source_file": str(filepath),
-                "file_last_modified": file_mod_time,
-                "chunk_number": i + 1
-            }
-            metadatas_list.append(chunk_metadata)
-        
-        # 3. Add all the chunks, IDs, and metadata to the collection
-        collection.add(
-            documents=chunks,
-            ids=ids_list,
-            metadatas=metadatas_list
-        )
-        
-        print(f"  ✔ Successfully added {len(chunks)} chunks from '{filepath.name}' to the database.")
 
 
 # --- PART 3: MAIN INTERACTIVE SCRIPT ---
