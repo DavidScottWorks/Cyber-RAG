@@ -1,0 +1,6 @@
+Add option to add_data to allow user to convert a webpage to PDF, add the PDF to the local data folder and then add that PDF to the ChromaDB RAG
+
+Add link following to the 'URL List' option
+
+Add javascript page scraping
+
