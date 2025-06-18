@@ -1,22 +1,15 @@
 import subprocess
 import sys
 
-# --- Dependency Lists ---
-# These are the libraries our project needs.
+# --- Dependency List ---
 REQUIRED_LIBS = [
-    "chromadb",
-    "requests",
-    "beautifulsoup4",
-    "PyMuPDF"
-    "langchain"
+    "chromadb", "requests", "beautifulsoup4", "PyMuPDF", "langchain", 
+    "collections", "urllib", "os", "time", "uuid",
+    "pathlib", "colorama"
 ]
-# --- End of Lists ---
 
 def check_library(lib_name):
-    """
-    Checks if a single library is installed. Uses importlib.metadata
-    Returns True if installed, False otherwise.
-    """
+    # Uses importlib.metadata. Returns True if installed, False otherwise.
     # PyMuPDF is imported as 'fitz'
     if lib_name == "PyMuPDF":
         lib_name = "fitz"
@@ -31,16 +24,13 @@ def check_library(lib_name):
         return False
 
 def install_libraries(libs_to_install):
-    """
-    Installs a list of libraries using pip.
-    """
     if not libs_to_install:
         print("No libraries to install.")
         return
 
-    print("\nAttempting to install missing libraries...")
+    print("\nAttempting to install missing libraries via pip. This will take a few mintues.")
     try:
-        # Calling pip via subprocess ensures we use the correct Python environment
+        # Calling pip via subprocess
         for lib in libs_to_install:
             print(f"Installing {lib}...")
             subprocess.check_call([sys.executable, "-m", "pip", "install", lib])
@@ -54,14 +44,12 @@ def install_libraries(libs_to_install):
 
 
 def main():
-    """
-    Main function to check dependencies and prompt for installation.
-    """
-    all_libs = REQUIRED_LIBS + OPTIONAL_LIBS
+    # Check for dependencies and prompt for installation.
+    all_libs = REQUIRED_LIBS
     installed_libs = []
     missing_libs = []
 
-    print("--- Checking Project Dependencies ---")
+    print("Checking Project Dependencies")
 
     for lib in all_libs:
         if check_library(lib):
@@ -76,16 +64,16 @@ def main():
             print(f"  - {lib}")
     
     if not missing_libs:
-        print("\nAll required and optional libraries are installed. You're all set!")
+        print("\nAll required libraries are installed. You're all set!")
         return
 
     print("\n[!] The following libraries are missing:")
     for lib in missing_libs:
-        # Check if the missing library is required or optional for a clearer message
+        # Check if the missing library is required for a clearer message
         status = "Required" if lib in REQUIRED_LIBS else "Optional"
         print(f"  - {lib} ({status})")
 
-    # --- Prompt for Installation ---
+    # Prompt for Install
     try:
         prompt = input("\nDo you want to install the necessary libraries? (yes/no): ").lower().strip()
     except KeyboardInterrupt:
