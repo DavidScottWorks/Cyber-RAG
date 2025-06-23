@@ -3,7 +3,7 @@ Set up for a cybersecurity RAG using ChromaDB. Meant to be connected to by a LLM
 ---
 dep_check <-- Checks dependencies and asks to install needed ones
 ---
-CreateDB <-- Creates the initial ChromaDB, named SecDB
+create_db <-- Creates the ChromaDB. Default name is SecDB. You can create and/or override new databases with different names for each.
 ---
-add_data <-- Parses and chunks txt and PDF's from a local folder (loc_data), a single URL or a URL text file and adds it to the database
+add_data <-- Parse and chunk txt and PDF's from a local folder (default: loc_data), a single URL or a URL text file and adds it to the database
 ---
