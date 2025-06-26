@@ -5,10 +5,7 @@ requests #webscraping
 beautifulsoup4 #parsing HTML
 PyMuPDF #extract text from local pdf
 langchain
-
-
-#standard python libraries
-#os
-#time
-#uuid
-#pathlib
+colorama
+requests
+packaging.version import parse as parse_version
+importlib.metadata
